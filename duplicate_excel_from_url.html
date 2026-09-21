@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Duplication feuille Excel</title>
+</head>
+<body>
+    <p>Traitement en cours...</p>
+
+    <script src="plugin/exceljs.min.js"></script>
+    <script src="asset/duplicateExcelFromUrl.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const fileUrl = params.get('url') || 'https://example.com/fichier.xlsx';
+        const copies = Number(params.get('copies')) || 3;
+
+        const runner = new window.DuplicateExcelFromUrl(fileUrl, copies);
+
+        runner.run()
+            .then((fileName) => {
+                document.body.innerHTML = '<p>Fichier téléchargé : ' + fileName + '</p>';
+            })
+            .catch((error) => {
+                console.error(error);
+                document.body.innerHTML = '<p>Erreur : ' + (error.message || 'Téléchargement impossible') + '</p>';
+            });
+    </script>
+</body>
+</html>
