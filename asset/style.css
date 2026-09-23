@@ -38,7 +38,7 @@ table td {
     text-align: center;
     border-bottom: 1px solid #ddd;
     font-size: 10px;
-    height: 15px;
+    height: 25px;
     width: 20px;
 }
 
@@ -149,4 +149,49 @@ th.jours5{
 }
 th.jours6{
    background-color: rgba(195, 216, 5, 0.744)
+}
+
+input.nameFilterInput {
+    background-color: transparent;
+    /* border: none; */
+    font-size: 10px;
+    outline: none; /* Optionnel : supprime la bordure bleue/noire par défaut lors du clic (focus) */
+    color:yellow;
+}
+
+.containerInTd {
+   display: flex;
+   align-items: stretch;
+    align-items: center; 
+    /* gap: 8px;          */
+    height:100%;
+    width:100%;   
+}
+
+td {
+   cursor: pointer;
+}
+
+
+span.heureEntree {
+    display: inline-block; /* Permet à l'élément de prendre une taille */
+    /* width: 10px; */
+    height: 10px;
+    /*background-color: red;  Une couleur pour le voir */
+    border-top: 1px solid red;
+    transform: rotate(-90deg); /* Tourne le texte vers la gauche */
+    white-space: nowrap;      /* Empêche le texte de revenir à la ligne */
+    translate: -5px;
+}
+/* span.heureEntree::before { */
+  /*content: "\00a0";  Espace insécable pour forcer la hauteur de ligne */
+/* } */
+
+td {
+  height: 100px; /* Force une hauteur identique partout */
+  vertical-align: middle; /* Aligne le contenu au centre verticalement */
+}
+
+#ma-case {
+   margin-right: 20px;
 }

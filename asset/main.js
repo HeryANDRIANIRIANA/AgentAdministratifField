@@ -1,6 +1,7 @@
 window.myPb = null;
 window.classement0={};
 window.justificatifs={};
+window.currentMois="2026-09";
 // Copie de la prmière feuille en fonction des dates
 async function copieFirtsSheet(){
          let wb=await window.ExcelAccessManager.readFile('data/verrif/result.xlsx')
@@ -204,7 +205,8 @@ async function getCommentaire(pdfUrl) {
 
 }
 
-async function listAndClassementFileNames(){ 
+async function listAndClassementFileNames(opt={}){ 
+    const{currentMois=window.currentMois}=opt
     let fileNames=await getFileList()
     let params1={
         start:0,
@@ -236,14 +238,15 @@ async function listAndClassementFileNames(){
                }
                
 
-                if(typeName==="TS"){
-                    if(typeof(o[moisName][typeName])==='undefined'){
-                    o[moisName][typeName]=[]
-                    }
-                    if(typeof(com1)==="object"){
-                    o[moisName][typeName].push({fileUrl:str, fileComment:com1})
-                    }
-                }else{
+                if(moisName===currentMois){
+                    if(typeName==="TS"){
+                        if(typeof(o[moisName][typeName])==='undefined'){
+                        o[moisName][typeName]=[]
+                        }
+                        if(typeof(com1)==="object"){
+                        o[moisName][typeName].push({fileUrl:str, fileComment:com1})
+                        }
+                    }else{
                     if(typeof(o[moisName][typeName])==='undefined'){
                     o[moisName][typeName]={}
                     }   
@@ -263,6 +266,8 @@ async function listAndClassementFileNames(){
                         })
                     }
                 }
+                }
+
             }   
             
         }
@@ -270,7 +275,7 @@ async function listAndClassementFileNames(){
             window.myPb.progress((end/lim)*100)
             setTimeout(async()=>await lire(), 10);  
         }else{
-            // console.log(o)
+            console.log(o)
             resolve(o)
         }
     }
@@ -400,4 +405,8 @@ $($(document).ready(async function() {
     let r=getCoordsJustifs()
     setJustificatifs(r)
     window.exportToexcel=new ExportToExcel()
+    const savePointage=new SavePointage()
+    let pointageData=await savePointage.lireFichierDonnees()
+    savePointage.renderDonnes(pointageData)
+    // console.log(pointageData)
 }));
