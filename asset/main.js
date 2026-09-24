@@ -210,7 +210,7 @@ async function listAndClassementFileNames(opt={}){
     let fileNames=await getFileList()
     let params1={
         start:0,
-        batchSize:10
+        batchSize:1
     }
     let i0=0
     let lim=fileNames.length 
@@ -229,8 +229,7 @@ async function listAndClassementFileNames(opt={}){
             let extensionName=fileName.split('.')[1]
             let moisName="", typeName=""
             if(extensionName==='pdf'){
-                let comm=await getCommentaire(str)
-                let com1=(typeof(comm)==='undefined')?"":JSON.parse(comm)   
+                
                moisName=fileName.split('/')[3]
                typeName=fileName.split('/')[4]
                if(typeof(o[moisName])==='undefined'){
@@ -239,6 +238,8 @@ async function listAndClassementFileNames(opt={}){
                
 
                 if(moisName===currentMois){
+                     let comm=await getCommentaire(str)
+                let com1=(typeof(comm)==='undefined')?"":JSON.parse(comm)  
                     if(typeName==="TS"){
                         if(typeof(o[moisName][typeName])==='undefined'){
                         o[moisName][typeName]=[]
