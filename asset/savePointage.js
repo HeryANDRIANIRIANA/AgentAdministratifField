@@ -16,6 +16,8 @@ class SavePointage{
        let tr=document.querySelectorAll('table tr')
        let x=0,y=0,v="",res=[]
        tr.forEach(e1 => {
+        let trid=e1.id
+        // console.log(trid)
          let tds=e1.querySelectorAll('td')
          y=0
          tds.forEach(e2 => {
@@ -23,14 +25,14 @@ class SavePointage{
             let span =e2.querySelector('.containerInTd .heureEntree')
             if(typeof(span)!=='undefined' && span!==null){
                 if(span.textContent!==""){
-                    res.push([x,y,span.textContent])
+                    res.push([trid,y,span.textContent])
                 }
             }
            y++
          });
          x++
        });
-    
+    console.log(res)
     return res
     }
 
@@ -83,14 +85,27 @@ async  lireFichierDonnees() {
 }
 
 renderDonnes(ar){
-  const y=23
+  
   ar.forEach((v)=>{
-    let tds=this.tr[v[0]].querySelectorAll('td')
-    let c=tds[y].querySelector('.containerInTd .heureEntree')
+    let tr=document.querySelector(`tr#${v[0]}`)
+    let tds=tr.children
+    let c=tds[v[1]].querySelector('.containerInTd .heureEntree')
     c.textContent=v[2]
   })
 }
 
+sumariseDay(n){
+  let s=n.toString().padStart(2,"0")
+  let sel=`td[data-index="${s}"]`
+  let tds=document.querySelectorAll(sel)
+  // console.log(tds)
+  for(let i=1;i<tds.length;i++){
+    let o=tds[i].querySelector('.containerInTd .heureEntree')
+    if(o.textContent===""){
+      o.dataset.status="error"
+    }
+  }
+}
 
 
 

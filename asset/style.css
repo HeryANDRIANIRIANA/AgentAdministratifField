@@ -178,14 +178,26 @@ span.heureEntree {
     /* width: 10px; */
     height: 10px;
     /*background-color: red;  Une couleur pour le voir */
-    border-top: 1px solid red;
+    border-top: 2px solid green;
     transform: rotate(-90deg); /* Tourne le texte vers la gauche */
     white-space: nowrap;      /* Empêche le texte de revenir à la ligne */
     translate: -5px;
 }
-/* span.heureEntree::before { */
-  /*content: "\00a0";  Espace insécable pour forcer la hauteur de ligne */
-/* } */
+span[data-statut="erreur"] {
+    display: inline-block; /* Permet à l'élément de prendre une taille */
+    /* width: 10px; */
+    height: 10px;
+    /*background-color: red;  Une couleur pour le voir */
+    border-top: 1px solid red;
+    transform: rotate(-90deg); /* Tourne le texte vers la gauche */
+    white-space: nowrap;      /* Empêche le texte de revenir à la ligne */
+    translate: -5px;
+    content: "\00a0";
+    
+}
+span[data-statut="erreur"]::before {
+  content: "\00a0";  /*Espace insécable pour forcer la hauteur de ligne */
+ }
 
 td {
   height: 100px; /* Force une hauteur identique partout */

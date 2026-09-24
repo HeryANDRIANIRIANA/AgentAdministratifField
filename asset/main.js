@@ -275,7 +275,7 @@ async function listAndClassementFileNames(opt={}){
             window.myPb.progress((end/lim)*100)
             setTimeout(async()=>await lire(), 10);  
         }else{
-            console.log(o)
+            // console.log(o)
             resolve(o)
         }
     }
@@ -407,6 +407,8 @@ $($(document).ready(async function() {
     window.exportToexcel=new ExportToExcel()
     const savePointage=new SavePointage()
     let pointageData=await savePointage.lireFichierDonnees()
+    // console.log(pointageData)
     savePointage.renderDonnes(pointageData)
+    // savePointage.sumariseDay(23)
     // console.log(pointageData)
 }));
