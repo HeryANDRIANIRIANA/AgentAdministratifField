@@ -210,7 +210,7 @@ async function listAndClassementFileNames(opt={}){
     let fileNames=await getFileList()
     let params1={
         start:0,
-        batchSize:1
+        batchSize:10
     }
     let i0=0
     let lim=fileNames.length 
@@ -218,7 +218,7 @@ async function listAndClassementFileNames(opt={}){
     // console.log(fileNames)
     return new Promise((resolve)=>{
         let lire= async () => {
-        let end= Math.min(i0+ params1.batchSize, lim);
+        let end= Math.min(i0 + params1.batchSize, lim);
         for (; i0< end; i0++) { 
             let fileName=fileNames[i0]
             
@@ -275,7 +275,8 @@ async function listAndClassementFileNames(opt={}){
             window.myPb.progress((end/lim)*100)
             setTimeout(async()=>await lire(), 10);  
         }else{
-            // console.log(o)
+            window.myPb.progress((end/lim)*100)
+            // console.log(end,lim)
             resolve(o)
         }
     }
@@ -393,7 +394,7 @@ ar.forEach(element => {
 $($(document).ready(async function() {
     window.myPb = new progressBar('progressBarContainer')
     window.classement0=await listAndClassementFileNames()
-    console.log(window.classement0)
+    // console.log(window.classement0)
     let wb=await window.ExcelAccessManager.readFile('data/CREATION SUIVI PRESENCE.xlsx')
     let ws=wb.getWorksheet('TU PLANTSITE')
     let colLimit=await getColMonth(ws)
