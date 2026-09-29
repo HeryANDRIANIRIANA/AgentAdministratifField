@@ -22,26 +22,41 @@ constructor(opt={}){
         let s=selectorIndex.toString().padStart(2,"0")
         let y=this.month.split('-')[0]
         let m=this.month.split('-')[1]
-        let dt=new Date(y,m,s)
+        let dt=new Date(y,parseInt(m)-1,parseInt(s))
         let d=dt.getDay()
-        // console.log(d)
+        let dateJour=new Date()
+        let dJourSeul=[dateJour.getDate()]
+        // console.log(dJourSeul)
+        // console.log(d,y,m,s)
+        let arJrs=['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.']
         th.dataset.index=s
         th.classList.add(`jours${d}`)
-        if(type==='td' && selectorIndex!=="0"){
+        if(selectorIndex!=="0"){//type==='td' && 
             let div=document.createElement('div')
             div.className='containerInTd'
+            if(dJourSeul.includes(parseInt(s)) && type==='td'){
+                // console.log(s)
+                div.classList.add('nonRecoupee')
+            }
+            
+            // div.className=(dJourSeul===parseInt(s) && type==='td')?'containerInTdToday':'containerInTd'
             let span=document.createElement('span')
-            span.textContent=''
+            span.textContent=(type==='th')?`${arJrs[d]}`:''
             span.className='heureEntree'
             div.appendChild(span)
             let label=document.createElement('label')
-            
             label.textContent=txt
             div.appendChild(label)
+            let span2=document.createElement('span')
+            span2.textContent=''
+            span2.className='heureSortie'
+            div.appendChild(span2)
+            
             div.addEventListener('click',(e)=>{
                 this.setEnterTime(e)
             })
             th.appendChild(div)
+
 
         }else{
             th.textContent=txt

@@ -385,6 +385,11 @@ ar.forEach(element => {
         // console.log(f.dataset)
         if(f!==null){
             f.classList.add('justified')
+            f.dataset.justifUrl=element[2]
+            f.addEventListener('click',(e)=>{
+                let parentTd=e.target.closest('td')
+                console.log(parentTd.dataset.justifUrl)
+            })
         }
     }
     // console.log(e)
@@ -393,7 +398,7 @@ ar.forEach(element => {
 }
 
 $($(document).ready(async function() {
-    window.myPb = new progressBar('progressBarContainer')
+    window.myPb = new progressBar('pbContainer2')
     window.classement0=await listAndClassementFileNames()
     // console.log(window.classement0)
     let wb=await window.ExcelAccessManager.readFile('data/CREATION SUIVI PRESENCE.xlsx')
@@ -411,6 +416,11 @@ $($(document).ready(async function() {
     let pointageData=await savePointage.lireFichierDonnees()
     // console.log(pointageData)
     savePointage.renderDonnes(pointageData)
+    savePointage.setHeureEntreeSortieTS()
+    window.myPb.setLoadedMode()
+
+    // await savePointage.chargerRectifs()
     // savePointage.sumariseDay(23)
     // console.log(pointageData)
+    window.legende=new legende()
 }));
