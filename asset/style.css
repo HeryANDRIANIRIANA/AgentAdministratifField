@@ -404,11 +404,35 @@ table.tableLegende0 tr td:nth-child(2) {
     flex-direction: column-reverse;
 }
 
-#legende .header {
+#legende .header, .justifContainer .header {
   cursor: pointer;
   background: linear-gradient(135deg, snow 50%, transparent 50%);
 }
+#justifContainer{
+  transition: transform 0.5s ease; /* Fluidité de l'animation */
+  z-index: 4;
+  position: absolute;
+  top:20%;
+  left:00%;
+   transform: translateX(-100%);
+}
+#justifContainer.is-active {
+  transform: translateX(0%); /* Translation verticale de 100px */
+}
 
+#justifContainer .body iframe{
+  width: 800px;
+  height: 600px;
+  background-color: aqua;
+}
+
+#justifContainer .header {
+  /* display: contents; */
+  cursor: pointer;
+  /* background-size: 100%; */
+  background: linear-gradient(45deg, snow 25%, transparent 50%);
+  margin:5px;
+}
 /* État initial du parent */
 #legende {
   transition: transform 0.5s ease; /* Fluidité de l'animation */

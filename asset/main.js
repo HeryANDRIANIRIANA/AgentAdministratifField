@@ -389,6 +389,14 @@ ar.forEach(element => {
             f.addEventListener('click',(e)=>{
                 let parentTd=e.target.closest('td')
                 console.log(parentTd.dataset.justifUrl)
+                //#justifContainer.is-active
+                let justifContainer=document.querySelector('#justifContainer')
+                if(!justifContainer.classList.contains("is-active")){
+                    justifContainer.classList.add('is-active')
+                    
+                }
+                let frame=justifContainer.querySelector('.body iframe')
+                    frame.src=parentTd.dataset.justifUrl
             })
         }
     }
@@ -423,4 +431,5 @@ $($(document).ready(async function() {
     // savePointage.sumariseDay(23)
     // console.log(pointageData)
     window.legende=new legende()
+    window.justifPannel=new JustifPannel()
 }));
