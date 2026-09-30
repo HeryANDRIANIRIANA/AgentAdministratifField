@@ -443,3 +443,8 @@ table.tableLegende0 tr td:nth-child(2) {
 #legende.is-active {
   transform: translateY(0%); /* Translation verticale de 100px */
 }
+
+.lastUpdtInfo{
+  position: relative;
+  top:110%;
+}

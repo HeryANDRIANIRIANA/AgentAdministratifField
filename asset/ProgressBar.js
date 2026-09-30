@@ -27,6 +27,7 @@ class progressBar {
         document.querySelector("#imageConatiner").style.display="none";
         document.querySelector("#pbContainer2").style.top="10px"
         document.querySelector("#pbContainer2").style.width="100%"
+        document.querySelector('.lastUpdtInfo').style.display='none'
     }
 
 }
