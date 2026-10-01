@@ -1,7 +1,30 @@
+// 1. Récupérer la partie de l'URL qui contient les paramètres (?nom=Dupont&ID=42)
+const parametresURL = window.location.search;
+
+// 2. Créer un objet URLSearchParams pour manipuler facilement ces paramètres
+const urlParams = new URLSearchParams(parametresURL);
+
+// 3. Extraire la variable de votre choix grâce à sa clé (.get('nom_de_la_clé'))
+let dt=new Date()
+let m=dt.getMonth()+1
+let y=dt.getFullYear()
+console.log(m,y);
+
+window.currentMois=`${y}-${m.toString().padStart(2,'0')}`;
+if(urlParams.has('mois') ){
+    window.currentMois = urlParams.get('mois');   
+    
+}
+
+// 4. Utiliser vos variables
+// console.log(window.currentMois); 
+
+
+
 window.myPb = null;
 window.classement0={};
 window.justificatifs={};
-window.currentMois="2026-09";
+// window.currentMois="2026-09";
 // Copie de la prmière feuille en fonction des dates
 async function copieFirtsSheet(){
          let wb=await window.ExcelAccessManager.readFile('data/verrif/result.xlsx')
@@ -294,13 +317,15 @@ async function getColMonth(ws){
     
     let mRow=ws.getRow(2).values //ligne des mois
     let colStart=0, colEnd=0
+    let m0=parseInt(window.currentMois.split('-')[1])-1
+    let m1=parseInt(window.currentMois.split('-')[1])
     mRow.forEach((v,i)=>{
        if(typeof(v)==="object"){
         // console.log(v.getMonth(),v.getFullYear())
-        if(v.getMonth()===8 && v.getFullYear()===2026){
+        if(v.getMonth()===m0 && v.getFullYear()===2026){
             colStart=(colStart===0)?i:colStart
         }
-        if(v.getMonth()===9 && v.getFullYear()===2026){
+        if(v.getMonth()===m1 && v.getFullYear()===2026){
             colEnd=(colEnd===0)?i:colEnd
         }
         
@@ -324,6 +349,7 @@ async function getColMonth(ws){
     }
     let s=ws.getCell(4,colStart).address
     let e=ws.getCell(4,colEnd).address
+    // console.log(`Colonne de début: ${s}, Colonne de fin: ${e}`);
     return [colStart,colEnd]
 }
 
@@ -343,7 +369,7 @@ async function getUsedRow(ws,colLimit,opt={}) {
 }
 
 function getCoordsJustifs(opt={}){
-const{month="2026-09"}=opt
+const{month=window.currentMois}=opt
 let res=[]
 let o=window.classement0[month]
 // console.log(o)
@@ -432,4 +458,5 @@ $($(document).ready(async function() {
     // console.log(pointageData)
     window.legende=new legende()
     window.justifPannel=new JustifPannel()
+    window.moisSelector=new MoisSelector()
 }));

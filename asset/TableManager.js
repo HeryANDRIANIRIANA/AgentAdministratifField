@@ -1,7 +1,7 @@
 class TableManager{
 
 constructor(opt={}){
-    const{month="2026-09",
+    const{month=window.currentMois,
         ws=null,
         colLimit=null,
         usedRow=null
