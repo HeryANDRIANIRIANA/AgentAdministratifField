@@ -24,7 +24,7 @@ if(urlParams.has('mois') ){
 window.myPb = null;
 window.classement0={};
 window.justificatifs={};
-// window.currentMois="2026-09";
+// window.currentMois="2026-09"; 
 // Copie de la prmière feuille en fonction des dates
 async function copieFirtsSheet(){
          let wb=await window.ExcelAccessManager.readFile('data/verrif/result.xlsx')
