@@ -456,6 +456,7 @@ $($(document).ready(async function() {
     // await savePointage.chargerRectifs()
     // savePointage.sumariseDay(23)
     // console.log(pointageData)
+    savePointage.sumarisePresence()
     window.legende=new legende()
     window.justifPannel=new JustifPannel()
     window.moisSelector=new MoisSelector()

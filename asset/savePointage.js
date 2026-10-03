@@ -147,4 +147,34 @@ this.renderDonnes(ar0)
 }
 }
 
+sumarisePresence(){ 
+  for(let i=1;i<this.tr.length;i++){
+    let tr=this.tr[i]
+    console.log(tr)
+    let tds=tr.querySelectorAll('td')
+    // tds[0].appendChild(document.createElement('span'))
+    let nbrAbsCount=document.createElement('span')
+    nbrAbsCount.className="nbrAbsCount"
+    nbrAbsCount.textContent="0"
+    tds[0].appendChild(nbrAbsCount)
+    let nbrAbsJustified=document.createElement('span')
+    nbrAbsJustified.className="nbrAbsJustified"
+    nbrAbsJustified.textContent="0"
+    tds[0].appendChild(nbrAbsJustified)
+
+    for(let j=1;j<tds.length;j++){
+      let td=tds[j]
+    //   let hEntreSortie=td.querySelectorAll('.containerInTd span')
+    //   let heureEntree=hEntreSortie[0]
+    //   let heureSortie=hEntreSortie[1]
+      let label=td.querySelector('label')
+      if(isNaN(label.textContent) && label.textContent!==""){
+        nbrAbsCount.textContent=parseInt(nbrAbsCount.textContent)+1
+      }
+    //   let presenceT=label.textContent 
+    }
+    }
+
+}
+
 }

@@ -94,6 +94,7 @@ constructor(opt={}){
                 // console.log(txt)
                 if(typeof(ar[i])!=="number"){
                     txt=txt.slice(0,2)
+                    //  console.log(tr,txt)
                 }
                 ajoutTH(txt,{type:'td',o:tr, selectorIndex:dtData[i]})
                 }else{
