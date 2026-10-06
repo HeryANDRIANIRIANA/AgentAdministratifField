@@ -8,7 +8,9 @@ const urlParams = new URLSearchParams(parametresURL);
 let dt=new Date()
 let m=dt.getMonth()+1
 let y=dt.getFullYear()
-console.log(m,y);
+let d=dt.getDate()
+// console.log(m,y);
+window.currentDate=`${y}-${m.toString().padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
 
 window.currentMois=`${y}-${m.toString().padStart(2,'0')}`;
 if(urlParams.has('mois') ){
@@ -432,10 +434,11 @@ ar.forEach(element => {
 }
 
 $($(document).ready(async function() {
+    document.querySelector('.lastUpdtInfo').textContent=`Last update : ${window.currentDate}`
     window.myPb = new progressBar('pbContainer2')
     window.classement0=await listAndClassementFileNames()
     // console.log(window.classement0)
-    let wb=await window.ExcelAccessManager.readFile('data/CREATION SUIVI PRESENCE.xlsx')
+    let wb=await window.ExcelAccessManager.readFile('data/CREATION SUIVI PRESENCE'+window.currentDate+'.xlsx')
     let ws=wb.getWorksheet('TU PLANTSITE')
     let colLimit=await getColMonth(ws)
     // console.log(colLimit)

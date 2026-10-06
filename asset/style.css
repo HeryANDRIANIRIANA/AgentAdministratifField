@@ -5,6 +5,12 @@ span.nbrAbsCount {
     border-radius: 100%;
 }
 
+.lastUpdtInfo{
+  font-size: 10px;
+  font-style: italic;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 #progressBarContainer{
     background-color: #f3f3f3;
     height:100%;
