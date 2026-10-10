@@ -12,6 +12,12 @@ constructor(opt={}){
     this.month=month
     let tcontainer=document.createElement('div')
     tcontainer.id='tableContainer'
+    if(document.querySelector('#tableContainer')){
+        document.querySelector('#tableContainer').remove()
+        // if(document.querySelector('#tableContainer').children.length>0){
+        // document.querySelector('#tableContainer').children[0].remove()
+    // }
+    }
     let table=document.createElement('table')
     tcontainer.appendChild(table)
     let hr=document.createElement('tr')

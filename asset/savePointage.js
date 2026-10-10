@@ -150,7 +150,7 @@ this.renderDonnes(ar0)
 sumarisePresence(){ 
   for(let i=1;i<this.tr.length;i++){
     let tr=this.tr[i]
-    console.log(tr)
+    // console.log(tr)
     let tds=tr.querySelectorAll('td')
     // tds[0].appendChild(document.createElement('span'))
     let nbrAbsCount=document.createElement('span')

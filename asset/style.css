@@ -5,6 +5,10 @@ span.nbrAbsCount {
     border-radius: 100%;
 }
 
+th[data-col-selector="acquis"], td[data-col-selector="acquis"]{
+  display: none;
+}
+
 .lastUpdtInfo{
   font-size: 10px;
   font-style: italic;
@@ -163,9 +167,9 @@ table tr:hover {
 }
 
 /* En-tête fixe (optionnel, pratique pour les longs tableaux) */
-table tr:first-child {
+table tr:first-child, table thead {
     background-color: #333;
-    /* color: yellow; */
+    color: yellow;
     position: sticky;
     z-index: 3;
     top: 0;
@@ -175,6 +179,8 @@ table tr th:first-child,
 table tr td:first-child {
   position: sticky;
   left: 0;
+  /* color: */
+  background-color: #fafafa;
    /*background-color: #ffffff; Obligatoire pour masquer le contenu qui défile en dessous */
   z-index: 2; /* Garantit que la colonne reste au-dessus des autres cellules */
 }

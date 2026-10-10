@@ -1,3 +1,5 @@
+window.wb=null
+window.feuilleConge='RECAP CONGEE MAI'
 // 1. Récupérer la partie de l'URL qui contient les paramètres (?nom=Dupont&ID=42)
 const parametresURL = window.location.search;
 
@@ -416,7 +418,7 @@ ar.forEach(element => {
             f.dataset.justifUrl=element[2]
             f.addEventListener('click',(e)=>{
                 let parentTd=e.target.closest('td')
-                console.log(parentTd.dataset.justifUrl)
+                // console.log(parentTd.dataset.justifUrl)
                 //#justifContainer.is-active
                 let justifContainer=document.querySelector('#justifContainer')
                 if(!justifContainer.classList.contains("is-active")){
@@ -433,34 +435,42 @@ ar.forEach(element => {
 });
 }
 
+async function chargeTUplantsit() {
+        let ws=window.wb.getWorksheet('TU PLANTSITE')
+        let colLimit=await getColMonth(ws)
+        // console.log(colLimit)
+        let usedRow= await getUsedRow(ws,colLimit)
+        // console.log(usedRow)
+        let params={ws:ws, colLimit:colLimit, usedRow:usedRow}
+        window.tableManager=new TableManager(params)
+        let r=getCoordsJustifs()
+        setJustificatifs(r)
+        window.exportToexcel=new ExportToExcel()
+        const savePointage=new SavePointage()
+        let pointageData=await savePointage.lireFichierDonnees()
+        // console.log(pointageData)
+        savePointage.renderDonnes(pointageData)
+        savePointage.setHeureEntreeSortieTS()
+        window.myPb.setLoadedMode()
+    
+        // await savePointage.chargerRectifs()
+        // savePointage.sumariseDay(23)
+        // console.log(pointageData)
+        savePointage.sumarisePresence()
+        window.legende=new legende()
+    }
+
 $($(document).ready(async function() {
     document.querySelector('.lastUpdtInfo').textContent=`Last update : ${window.currentDate}`
     window.myPb = new progressBar('pbContainer2')
     window.classement0=await listAndClassementFileNames()
+    
     // console.log(window.classement0)
-    let wb=await window.ExcelAccessManager.readFile('data/CREATION SUIVI PRESENCE'+window.currentDate+'.xlsx')
-    let ws=wb.getWorksheet('TU PLANTSITE')
-    let colLimit=await getColMonth(ws)
-    // console.log(colLimit)
-    let usedRow= await getUsedRow(ws,colLimit)
-    // console.log(usedRow)
-    let params={ws:ws, colLimit:colLimit, usedRow:usedRow}
-    window.tableManager=new TableManager(params)
-    let r=getCoordsJustifs()
-    setJustificatifs(r)
-    window.exportToexcel=new ExportToExcel()
-    const savePointage=new SavePointage()
-    let pointageData=await savePointage.lireFichierDonnees()
-    // console.log(pointageData)
-    savePointage.renderDonnes(pointageData)
-    savePointage.setHeureEntreeSortieTS()
-    window.myPb.setLoadedMode()
-
-    // await savePointage.chargerRectifs()
-    // savePointage.sumariseDay(23)
-    // console.log(pointageData)
-    savePointage.sumarisePresence()
-    window.legende=new legende()
+    window.wb=await window.ExcelAccessManager.readFile('data/CREATION SUIVI PRESENCE'+window.currentDate+'.xlsx')
+    
+    await chargeTUplantsit()
     window.justifPannel=new JustifPannel()
     window.moisSelector=new MoisSelector()
+    window.pointageOrConge=new PointageOrConge()
+    // window.tableConge=new TableConge()
 }));
