@@ -456,7 +456,7 @@ async function chargeTUplantsit() {
         // await savePointage.chargerRectifs()
         // savePointage.sumariseDay(23)
         // console.log(pointageData)
-        savePointage.sumarisePresence()
+        // savePointage.sumarisePresence()
         window.legende=new legende()
     }
 
