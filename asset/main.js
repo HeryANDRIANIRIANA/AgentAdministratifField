@@ -7,7 +7,7 @@ const parametresURL = window.location.search;
 const urlParams = new URLSearchParams(parametresURL);
 
 // 3. Extraire la variable de votre choix grâce à sa clé (.get('nom_de_la_clé'))
-let dt=new Date()
+let dt=new Date(2026,9,16)
 let m=dt.getMonth()+1
 let y=dt.getFullYear()
 let d=dt.getDate()
