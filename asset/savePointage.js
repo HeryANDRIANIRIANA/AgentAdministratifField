@@ -63,7 +63,8 @@ telechargerFichierTexte(donnees, nomFichier = 'donnees.txt') {
 }
 
 async  lireFichierDonnees(opt={}) {
-  const{pointageUrl=`data/${window.currentMois}/pointage${window.currentDate}.txt`}=opt
+  const{pointageUrl=`data/${window.currentMois}/pointage.txt`}=opt
+  //${window.currentDate}.
   try {
     // 1. Appeler le fichier (remplacez par le chemin réel de votre fichier)
     const reponse = await fetch(pointageUrl);
